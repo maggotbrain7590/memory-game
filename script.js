@@ -15,7 +15,7 @@ const COLORS = [
 
 // here is a helper function to shuffle an array
 // it returns the same array with values shuffled
-// it is based on an algorithm called Fisher Yates if you want ot research more
+// it is based on an algorithm called Fisher Yates if you want to research more
 function shuffle(array) {
   let counter = array.length;
 
@@ -51,15 +51,29 @@ function createDivsForColors(colorArray) {
 
     // call a function handleCardClick when a div is clicked on
     newDiv.addEventListener("click", handleCardClick);
-
+    
     // append the div to the element with an id of game
     gameContainer.append(newDiv);
   }
 }
 
+
+
 // TODO: Implement this function!
 function handleCardClick(event) {
   // you can use event.target to see which element was clicked
+  const card = event.target;
+  if (card.classList.contains('red')) {
+    card.classList.add('redBg');
+  } else if (card.classList.contains('blue')) {
+    card.classList.add('blueBg');
+  } else if (card.classList.contains('green')) {
+    card.classList.add('greenBg');
+  } else if (card.classList.contains('orange')) {
+    card.classList.add('orangeBg');
+  } else {
+    card.classList.add('purpleBg');
+  }
   console.log("you just clicked", event.target);
 }
 

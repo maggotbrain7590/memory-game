@@ -5,3 +5,23 @@
   margin: 10px;
   display: inline-block;
 }
+
+.redBg {
+  background-color: red;
+}
+
+.blueBg {
+  background-color: blue;
+}
+
+.greenBg {
+  background-color: green;
+}
+
+.orangeBg {
+  background-color: orange;
+}
+
+.purpleBg {
+  background-color: purple;
+}
