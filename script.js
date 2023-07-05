@@ -51,9 +51,10 @@ function createDivsForColors(colorArray) {
 
     // call a function handleCardClick when a div is clicked on
     newDiv.addEventListener("click", handleCardClick);
-    
+   
     // append the div to the element with an id of game
     gameContainer.append(newDiv);
+  
   }
 }
 
@@ -61,21 +62,26 @@ function createDivsForColors(colorArray) {
 
 // TODO: Implement this function!
 function handleCardClick(event) {
-  // you can use event.target to see which element was clicked
+  //Change card color on click
   const card = event.target;
   if (card.classList.contains('red')) {
-    card.classList.add('redBg');
+    card.classList.toggle('redBg');
   } else if (card.classList.contains('blue')) {
-    card.classList.add('blueBg');
+    card.classList.toggle('blueBg');
   } else if (card.classList.contains('green')) {
-    card.classList.add('greenBg');
+    card.classList.toggle('greenBg');
   } else if (card.classList.contains('orange')) {
-    card.classList.add('orangeBg');
+    card.classList.toggle('orangeBg');
   } else {
-    card.classList.add('purpleBg');
+    card.classList.toggle('purpleBg');
   }
+  
   console.log("you just clicked", event.target);
-}
+  }
 
 // when the DOM loads
 createDivsForColors(shuffledColors);
+
+
+
+ 
