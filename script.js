@@ -1,4 +1,6 @@
 const gameContainer = document.getElementById("game");
+let card1 = null;
+let card2 = null;
 
 const COLORS = [
   "red",
@@ -51,6 +53,7 @@ function createDivsForColors(colorArray) {
 
     // call a function handleCardClick when a div is clicked on
     newDiv.addEventListener("click", handleCardClick);
+    
    
     // append the div to the element with an id of game
     gameContainer.append(newDiv);
@@ -58,26 +61,33 @@ function createDivsForColors(colorArray) {
   }
 }
 
-
-
+let flippedArr = [];
 // TODO: Implement this function!
 function handleCardClick(event) {
-  //Change card color on click
-  const card = event.target;
-  if (card.classList.contains('red')) {
-    card.classList.toggle('redBg');
-  } else if (card.classList.contains('blue')) {
-    card.classList.toggle('blueBg');
-  } else if (card.classList.contains('green')) {
-    card.classList.toggle('greenBg');
-  } else if (card.classList.contains('orange')) {
-    card.classList.toggle('orangeBg');
+  let currentCard = event.target;
+  //assign background color to target card
+  currentCard.style.backgroundColor = currentCard.classList[0];
+  //add cards to array and assign cards
+  flippedArr.push(event.target);
+  card1 = flippedArr[0];
+  card2 = flippedArr[1];
+  //check for match
+  if (card1.style.backgroundColor === card2.style.backgroundColor) {
+    flippedArr = [];
   } else {
-    card.classList.toggle('purpleBg');
+    flippedArr = [];
+    setTimeout(unflip, 1500);
   }
-  
   console.log("you just clicked", event.target);
-  }
+}
+
+//Remove color/class from cards if they don't match
+function unflip() {
+  card1.style.backgroundColor = '';
+  card2.style.backgroundColor = '';
+  card1 = null;
+  card2 = null;
+}
 
 // when the DOM loads
 createDivsForColors(shuffledColors);
