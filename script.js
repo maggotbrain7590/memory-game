@@ -1,6 +1,7 @@
 const gameContainer = document.getElementById("game");
 let card1 = null;
 let card2 = null;
+let checking = false;
 
 const COLORS = [
   "red",
@@ -62,31 +63,46 @@ function createDivsForColors(colorArray) {
 }
 
 let flippedArr = [];
-// TODO: Implement this function!
 function handleCardClick(event) {
+  //Experiment
+  if (checking) return;
+  //
   let currentCard = event.target;
   //assign background color to target card
   currentCard.style.backgroundColor = currentCard.classList[0];
+
   //add cards to array and assign cards
   flippedArr.push(event.target);
   card1 = flippedArr[0];
   card2 = flippedArr[1];
-  //check for match
+
+  //Remove event listener to prevent same card click
+  card1.removeEventListener('click', handleCardClick);
+  
+ //check for match
+ if (card1 && card2) {
+    checking = true;
   if (card1.style.backgroundColor === card2.style.backgroundColor) {
     flippedArr = [];
+    card1.removeEventListener('click', handleCardClick);
+    card2.removeEventListener('click', handleCardClick);
+    checking = false;
   } else {
     flippedArr = [];
-    setTimeout(unflip, 1500);
+    card1.addEventListener('click', handleCardClick);
+    setTimeout(unflip, 1000);
   }
+}
   console.log("you just clicked", event.target);
 }
 
-//Remove color/class from cards if they don't match
+//Remove color from cards if they don't match
 function unflip() {
   card1.style.backgroundColor = '';
   card2.style.backgroundColor = '';
   card1 = null;
   card2 = null;
+  checking = false;
 }
 
 // when the DOM loads
@@ -94,4 +110,4 @@ createDivsForColors(shuffledColors);
 
 
 
- 
+// 
